@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Solutions Pro | الأنظمة المتكاملة والحلول الأمنية العالمية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root[data-theme="dark"] {
+    --navy-950:#050d18;
+    --navy-900:#0b1e3d;
+    --navy-800:#10294f;
+    --navy-700:#173a6b;
+    --cable-blue:#2f6fed;
+    --cable-orange:#ff7a2f;
+    --cable-orange-dim:#ff7a2f22;
+    --paper:#081525;
+    --paper-2:#0b1e3d;
+    --ink:#f4f6f9;
+    --ink-soft:#9fb0d1;
+    --line:#173a6b;
+    --ok:#1fae6b;
+    --radius:14px;
+    --maxw:1240px;
+    --transition: cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  }
+
+  :root[data-theme="light"] {
+    --navy-950:#081525;
+    --navy-900:#ffffff;
+    --navy-800:#f4f6f9;
+    --navy-700:#e2e7f0;
+    --cable-blue:#2f6fed;
+    --cable-orange:#ff7a2f;
+    --cable-orange-dim:#ff7a2f22;
+    --paper:#f8fafd;
+    --paper-2:#ffffff;
+    --ink:#0d1b2e;
+    --ink-soft:#4a5876;
+    --line:#e2e7f0;
+    --ok:#1fae6b;
+    --radius:14px;
+    --maxw:1240px;
+    --transition: cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Cairo',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  ::selection{background:var(--cable-orange);color:#fff;}
+
+  /* ---------- Utility Bar ---------- */
+  .topbar{
+    background:var(--navy-950);
+    color:#cdd8ee;
+    font-size:13px;
+  }
+  .topbar .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:8px 24px;flex-wrap:wrap;gap:6px;
+  }
+  .topbar .left{display:flex;gap:18px;align-items:center;}
+  .topbar .left span{display:flex;align-items:center;gap:6px;}
+  .topbar .right{display:flex;gap:14px;align-items:center;}
+  .topbar .right a{opacity:.85;transition:opacity .2s; cursor: pointer;}
+  .topbar .right a:hover{opacity:1;color:var(--cable-orange);}
+
+  /* Theme Switcher Button */
+  .theme-btn {
+    background: var(--navy-800); border: 1px solid var(--line); color: var(--ink);
+    padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 11px; font-family: inherit;
+  }
+
+  /* ---------- Header ---------- */
+  header.main{
+    background:var(--navy-900);
+    position:sticky;top:0;z-index:100;
+    border-bottom:3px solid var(--cable-orange);
+    transition: background 0.3s;
+  }
+  .header-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;gap:24px;
+  }
+  .logo{display:flex;align-items:center;gap:10px;color:var(--ink);cursor: pointer;}
+  .logo-mark{
+    width:42px;height:42px;border-radius:10px;
+    background:linear-gradient(135deg,var(--cable-blue),var(--cable-orange));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono';font-weight:700;color:#fff;font-size:15px;
+    flex-shrink:0;
+  }
+  .logo-text{line-height:1.1;}
+  .logo-text b{font-size:19px;font-weight:800;display:block;letter-spacing:.3px;}
+  .logo-text small{font-size:11px;color:var(--ink-soft);font-weight:500;}
+
+  .search-bar{
+    flex:1;max-width:410px;
+    display:flex;align-items:center;
+    background:var(--navy-800);
+    border:1px solid var(--line);
+    border-radius:10px;overflow:hidden;
+  }
+  .search-bar input{
+    flex:1;background:none;border:none;outline:none;
+    padding:11px 14px;color:var(--ink);font-family:'Cairo';font-size:14px;
+  }
+  .search-bar input::placeholder{color:var(--ink-soft);}
+  .search-bar button{
+    background:var(--cable-orange);border:none;color:#fff;
+    padding:0 16px;cursor:pointer;display:flex;align-items:center;
+    height:100%;
+  }
+
+  .header-actions{display:flex;align-items:center;gap:20px;}
+  .header-actions .item{
+    display:flex;align-items:center;gap:8px;color:var(--ink);font-size:13px;
+    cursor:pointer;position:relative;
+  }
+  .header-actions .item strong{display:block;font-size:13px;}
+  .header-actions .item small{color:var(--ink-soft);font-size:11px;}
+  
+  .cart-btn-trigger {
+    background: transparent; border: none; text-align: right; font-family: inherit; padding: 0;
+  }
+  .cart-count{
+    position:absolute;top:-6px;left:-8px;background:var(--cable-orange);
+    color:#fff;font-size:10px;width:18px;height:18px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-weight:700;
+  }
+  .icon-circle{
+    width:38px;height:38px;border-radius:50%;background:var(--navy-800);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    transition: var(--transition); border: 1px solid var(--line);
+  }
+  .icon-circle:hover { background: var(--line); }
+
+  /* ---------- Navigation Bar ---------- */
+  nav.catnav{ background:var(--navy-800); border-top:1px solid var(--line); }
+  .catnav .wrap{display:flex;align-items:center;gap:2px;padding:0 24px;}
+  .catnav a{
+    color:var(--ink);font-size:14px;font-weight:600;padding:13px 16px;
+    white-space:nowrap;position:relative;transition: var(--transition);
+    cursor: pointer;
+  }
+  .catnav a:hover, .catnav a.active{color:var(--cable-orange);}
+  .catnav a.active::after {
+    content: ''; position: absolute; bottom: 0; left: 16px; right: 16px; height: 3px; background: var(--cable-orange); border-radius: 3px 3px 0 0;
+  }
+  
+  .menu-toggle { display: none; background: transparent; border: none; color: var(--ink); cursor: pointer; }
+
+  /* ---------- SPA Pages View System ---------- */
+  .page-view {
+    display: none; opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .page-view.active-page { display: block; opacity: 1; transform: translateY(0); }
+
+  /* ---------- Hero Section ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 100%);
+    color:var(--ink); border-bottom: 1px solid var(--line);
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:40px;
+    align-items:center;padding:72px 24px 64px;
+    max-width:var(--maxw);margin:0 auto;position:relative;z-index:2;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono';font-size:12px;color:var(--cable-orange);
+    letter-spacing:1px;margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:8px;height:8px;background:var(--cable-orange);border-radius:50%;display:inline-block;box-shadow:0 0 0 4px var(--cable-orange-dim);}
+  .hero h1{ font-size:44px;font-weight:900;line-height:1.25;margin:0 0 18px; }
+  .hero h1 span{ background:linear-gradient(90deg,var(--cable-orange),#ffb37a); -webkit-background-clip:text;background-clip:text;color:transparent; }
+  .hero p{ font-size:16px;color:var(--ink-soft);line-height:1.9;max-width:520px;margin:0 0 30px; }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 26px;border-radius:10px;font-weight:700;font-size:14.5px;
+    cursor:pointer;border:none;transition:transform .2s, box-shadow .2s;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--cable-orange);color:#fff;box-shadow:0 8px 24px -8px #ff7a2f88;}
+  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
+  .btn-outline:hover{border-color:var(--cable-orange); background: var(--navy-800);}
+
+  .hero-stats{display:flex;gap:32px;}
+  .hero-stats .st b{ font-family:'JetBrains Mono';font-size:24px;color:var(--ink);display:block; }
+  .hero-stats .st span{font-size:12.5px;color:var(--ink-soft);}
+
+  .hero-visual{position:relative;height:400px;}
+  .hero-visual svg{width:100%;height:100%;}
+  .node{fill:var(--navy-800);stroke:var(--cable-blue);stroke-width:1.5;}
+  .node-orange{stroke:var(--cable-orange);}
+  .link{stroke:var(--line);stroke-width:1.5;fill:none;}
+  .pulse{fill:var(--cable-orange);}
+
+  /* ---------- Section Shell ---------- */
+  section{padding:64px 0;}
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:32px;flex-wrap:wrap;gap:12px;
+  }
+  .section-head .eyebrow{color:var(--cable-blue);}
+  .section-head h2{font-size:28px;font-weight:800;margin:0;color:var(--ink);}
+  .section-head p{color:var(--ink-soft);font-size:14px;margin:6px 0 0;}
+  .see-all{
+    font-size:13.5px;font-weight:700;color:var(--cable-blue);
+    display:flex;align-items:center;gap:6px; cursor: pointer;
+  }
+
+  /* ---------- Categories & Filters ---------- */
+  .cat-grid{ display:grid;grid-template-columns:repeat(6,1fr);gap:16px; }
+  .cat-card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 14px;text-align:center;transition:.25s;cursor:pointer;
+  }
+  .cat-card:hover, .cat-card.active-filter{border-color:var(--cable-orange);transform:translateY(-4px);box-shadow:0 16px 30px -18px rgba(11,30,61,.25);}
+  .cat-icon{
+    width:56px;height:56px;border-radius:14px;margin:0 auto 12px;
+    background:var(--navy-800); display:flex;align-items:center;justify-content:center;
+  }
+  .cat-card b{font-size:13.5px;color:var(--ink);display:block;}
+  .cat-card small{font-size:11.5px;color:var(--ink-soft);}
+
+  .filter-wrapper { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 25px; }
+  .filter-btn {
+    background: var(--paper-2); border: 1px solid var(--line); color: var(--ink);
+    padding: 8px 18px; border-radius: 30px; cursor: pointer; font-family: inherit; font-weight: 600; transition: 0.2s;
+    white-space: nowrap;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--cable-orange); color: white; border-color: var(--cable-orange); }
+
+  /* ---------- Products Grid ---------- */
+  .prod-grid{ display:grid;grid-template-columns:repeat(4,1fr);gap:20px; min-height: 300px; }
+  .prod-card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;transition:.25s;position:relative;
+  }
+  .prod-card:hover{box-shadow:0 20px 40px -22px rgba(11,30,61,.3);transform:translateY(-4px);}
+  .prod-badge{
+    position:absolute;top:12px;right:12px;background:var(--cable-orange);
+    color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;z-index:2;
+  }
+  .prod-badge.stock{background:var(--ok);}
+  .prod-img{
+    height:180px;background:linear-gradient(135deg,var(--navy-800),var(--navy-700));
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .prod-body{padding:16px;}
+  .prod-cat{font-size:11px;color:var(--cable-blue);font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+  .prod-name{font-size:14.5px;font-weight:700;color:var(--ink);margin:6px 0 10px;line-height:1.5;min-height:44px;}
+  .prod-price-row{display:flex;align-items:center;justify-content:space-between;}
+  .prod-price{font-family:'JetBrains Mono';font-weight:700;font-size:16px;color:var(--ink);}
+  .prod-price small{font-size:11px;color:var(--ink-soft);font-weight:400;text-decoration:line-through;margin-inline-start:6px;}
+  .add-btn{
+    width:38px;height:38px;border-radius:8px;background:var(--navy-700);color:var(--ink);
+    display:flex;align-items:center;justify-content:center;border:1px solid var(--line);cursor:pointer;
+    transition:.2s;flex-shrink:0;
+  }
+  .add-btn:hover{background:var(--cable-orange); color: white;}
+  .no-results { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--ink-soft); }
+
+  /* ---------- Why Choose Us ---------- */
+  .why{background:var(--navy-950);color:var(--ink);position:relative;overflow:hidden; border-top: 1px solid var(--line);}
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:var(--radius);overflow:hidden;}
+  .why-item{background:var(--paper-2);padding:32px 24px;text-align:center;}
+  .why-item b{
+    font-family:'JetBrains Mono';font-size:32px;display:block;
+    background:linear-gradient(90deg,var(--cable-orange),#ffb37a);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .why-item span{font-size:13px;color:var(--ink-soft);display:block;margin-top:8px;}
+
+  /* ---------- Brands Strip ---------- */
+  .brands{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .brands .wrap{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;flex-wrap:wrap;gap:18px;}
+  .brand-name{font-family:'JetBrains Mono';font-weight:700;color:var(--ink-soft);font-size:15px;letter-spacing:.5px;transition:.2s;}
+  .brand-name:hover{color:var(--cable-orange);}
+
+  /* ---------- CTA Band ---------- */
+  .cta-band{
+    background:linear-gradient(120deg,var(--cable-blue),#1a4fc4);
+    border-radius:var(--radius);color:#fff;
+    padding:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+    margin:40px auto;max-width:calc(var(--maxw) - 48px);
+  }
+  .cta-band h3{font-size:22px;margin:0 0 6px;font-weight:800;}
+  .cta-band p{margin:0;color:#dbe6ff;font-size:14px;}
+  .cta-band .btn-primary{background:#fff;color:var(--navy-950);}
+
+  /* ---------- Dynamic Cart Sidebar Drawer ---------- */
+  .cart-drawer {
+    position: fixed; top: 0; left: -400px; width: 380px; height: 100%;
+    background: var(--paper-2); box-shadow: 5px 0 30px rgba(0,0,0,0.3);
+    z-index: 200; transition: left 0.3s ease; display: flex; flex-direction: column;
+    border-right: 1px solid var(--line);
+  }
+  .cart-drawer.open { left: 0; }
+  .cart-drawer-header {
+    background: var(--navy-950); color: #fff; padding: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cart-drawer-header h3 { margin: 0; font-size: 18px; }
+  .close-cart { background: none; border: none; color: #fff; font-size: 24px; cursor: pointer; }
+  .cart-items-container { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+  .cart-empty-msg { text-align: center; color: var(--ink-soft); margin-top: 40px; }
+  
+  .cart-item { display: flex; gap: 12px; align-items: center; padding-bottom: 15px; border-bottom: 1px solid var(--line); }
+  .cart-item-details { flex: 1; }
+  .cart-item-title { font-size: 13.5px; font-weight: 700; margin-bottom: 4px; color: var(--ink); }
+  .cart-item-price { font-size: 13px; color: var(--cable-orange); font-weight: bold; }
+  .cart-item-qty { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .qty-btn { width: 24px; height: 24px; border: 1px solid var(--line); background: var(--navy-700); color: var(--ink); border-radius: 4px; cursor: pointer; font-weight: bold;}
+  .remove-item { background: none; border: none; color: #ff4d4d; cursor: pointer; font-size: 12px; padding: 0; margin-top: 5px; display: block; }
+  
+  .cart-drawer-footer { padding: 20px; border-top: 1px solid var(--line); background: var(--navy-950); }
+  .cart-total-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; margin-bottom: 15px; color: #fff;}
+  .checkout-btn { width: 100%; text-align: center; justify-content: center; background: var(--ok); color: #fff; display: flex; align-items: center; gap: 8px; margin-bottom: 8px;}
+  .checkout-btn:hover { background: #1a965c; }
+  
+  .cart-overlay {
+    position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6);
+    z-index: 190; display: none;
+  }
+  .cart-overlay.open { display: block; }
+
+  /* ---------- Inner Pages Content (About / Contact) ---------- */
+  .page-hero {
+    background: var(--navy-950); color: #fff; padding: 48px 0; text-align: center;
+    border-bottom: 3px solid var(--cable-orange);
+  }
+  .page-hero h1 { margin: 0; font-size: 32px; }
+  .info-card { background: var(--paper-2); border: 1px solid var(--line); padding: 30px; border-radius: var(--radius); margin-bottom: 30px; line-height: 1.8; }
+  
+  /* Contact Form styles */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 12px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 8px; font-family: inherit; outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--cable-blue); }
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-950);color:#a9b8db;padding-top:56px;font-size:14px; margin-top: 40px; border-top: 1px solid var(--line);}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:32px;padding-bottom:40px;border-bottom:1px solid var(--line);}
+  .foot-grid h4{color:#fff;font-size:15px;margin:0 0 16px;}
+  .foot-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  .foot-grid ul a{opacity:.85;transition:.2s; cursor: pointer;}
+  .foot-grid ul a:hover{opacity:1;color:var(--cable-orange);}
+  .foot-contact li{display:flex;gap:10px;align-items:flex-start;}
+  .newsletter{display:flex;margin-top:14px;border-radius:8px;overflow:hidden;border:1px solid var(--line);}
+  .newsletter input{flex:1;background:var(--paper);border:none;padding:11px 12px;color:var(--ink);font-family:'Cairo';outline:none;}
+  .newsletter button{background:var(--cable-orange);border:none;color:#fff;padding:0 16px;cursor:pointer;font-weight:700;}
+  .bottom-bar{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;flex-wrap:wrap;gap:10px;}
+  .socials{display:flex;gap:10px;}
+  .socials a{width:34px;height:34px;border-radius:50%;background:var(--navy-800);display:flex;align-items:center;justify-content:center;}
+  .socials a:hover{background:var(--cable-orange); color:#fff;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:1000px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-visual{height:260px;order:-1;}
+    .cat-grid{grid-template-columns:repeat(3,1fr);}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  
+  @media (max-width:768px){
+    .menu-toggle { display: block; font-size: 22px; }
+    .catnav .wrap {
+      display: none; flex-direction: column; width: 100%; background: var(--navy-900); padding: 10px 0;
+    }
+    .catnav.mobile-open .wrap { display: flex; }
+    .catnav a { width: 100%; padding: 12px 24px; border-bottom: 1px solid var(--line); }
+    .catnav a.active::after { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width:600px){
+    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .prod-grid{grid-template-columns:1fr 1fr;}
+    .hero h1{font-size:30px;}
+    .header-actions .item span, .header-actions .item div:last-child {display:none;}
+    .why-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    .cta-band{flex-direction:column;text-align:center; padding: 24px;}
+    .cart-drawer { width: 100%; left: -100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h3>سلة المشتريات الذكية</h3>
+    <button class="close-cart" id="closeCartBtn">×</button>
+  </div>
+  <div class="cart-items-container" id="cartItemsContainer"></div>
+  <div class="cart-drawer-footer">
+    <div class="cart-total-row">
+      <span>إجمالي الحساب:</span>
+      <span id="cartDrawerTotal">0 ج.م</span>
+    </div>
+    <button class="btn checkout-btn" id="checkoutWhatsappBtn">
+      إرسال الطلب عبر واتساب
+    </button>
+    <button class="btn btn-outline" style="width: 100%; justify-content: center; font-size: 13px; color: #fff;" onclick="alert('تم حفظ عرض السعر المبدئي! رقم الطلب المحفوظ تلقائياً: #' + Math.floor(Math.random()*90000+10000))">
+      📄 تحميل عرض سعر رسمي (PDF)
+    </button>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="left">
+      <span>🚚 شحن سريع وآمن لكل المحافظات</span>
+      <span>🛡️ ضمان استبدال حقيقي 14 يوم</span>
+    </div>
+    <div class="right">
+      <a onclick="navigateTo('contact')">تتبع شحنتك</a>
+      <a onclick="navigateTo('contact')">الدعم المباشر</a>
+      <button class="theme-btn" id="themeToggleBtn">🎨 المظهر الداكن/المضيء</button>
+    </div>
+  </div>
+</div>
+
+<header class="main">
+  <div class="header-row wrap">
+    <button class="menu-toggle" id="menuToggle" aria-label="القائمة">☰</button>
+    
+    <div class="logo" onclick="navigateTo('home')">
+      <div class="logo-mark">IT</div>
+      <div class="logo-text">
+        <b>IT SOLUTIONS PRO</b>
+        <small>البنية التحتية والحلول المتكاملة</small>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="mainSearchInput" placeholder="ابحث فوري عن راوتر، كاميرا، سويتش...">
+      <button aria-label="بحث" onclick="executeSearch()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+
+    <div class="header-actions">
+      <div class="item" onclick="openGeneralWhatsApp()">
+        <div class="icon-circle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <small>المبيعات الهندسية</small>
+          <strong class="mono">تواصل الآن</strong>
+        </div>
+      </div>
+      
+      <button class="item cart-btn-trigger" id="cartTriggerBtn">
+        <div class="icon-circle" style="position:relative;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count" id="cartCountBadge">0</span>
+        </div>
+        <div>
+          <small>عربة التسوق</small>
+          <strong id="cartTotalHeader">0 ج.م</strong>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <nav class="catnav" id="catNavMenu">
+    <div class="wrap">
+      <a class="nav-link active" data-page="home" onclick="navigateTo('home')">الرئيسية</a>
+      <a class="nav-link" data-page="products" onclick="navigateTo('products')">كل الحلول والمنتجات</a>
+      <a class="nav-link" data-page="about" onclick="navigateTo('about')">رؤيتنا الإستراتيجية</a>
+      <a class="nav-link" data-page="contact" onclick="navigateTo('contact')">طلب معاينة فنية</a>
+    </div>
+  </nav>
+</header>
+
+<div id="page-home" class="page-view active-page">
+  <section class="hero" style="padding:0;">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">GLOBAL NETWORK &amp; SECURITY INFRASTRUCTURE</div>
+        <h1>الربط الذكي والأمان الفوري<br><span>مستقبل أعمالك يبدأ هنا</span></h1>
+        <p>معدات شبكات سحابية، أنظمة مراقبة قائمة على الذكاء الاصطناعي، وحلول أمنية مطابقة للمواصفات القياسية العالمية مع إشراف فني معتمد.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" onclick="navigateTo('products')">تصفح معرض الأجهزة</a>
+          <a class="btn btn-outline" onclick="navigateTo('contact')">طلب دراسة فنية للمشروع</a>
+        </div>
+        <div class="hero-stats">
+          <div class="st"><b class="mono">14+</b><span>سنة اعتماد</span></div>
+          <div class="st"><b class="mono">4,800+</b><span>موقع تم تجهيزه</span></div>
+          <div class="st"><b class="mono">99.9%</b><span>معدل استقرار الشبكات</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg viewBox="0 0 420 400" id="netsvg">
+          <g class="links"></g>
+          <g class="nodes"></g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="categories">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">التصنيفات المعتمدة</div>
+          <h2>هندسة الأنظمة في قطاع الأعمال والأفراد</h2>
+        </div>
+        <a class="see-all" onclick="navigateTo('products')">تصفح الفئات الحية ←</a>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="selectCategoryFilter('شبكات')">
+          <div class="cat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f6fed" stroke-width="1.8"><rect x="4" y="4" width="16" height="6" rx="1"/><rect x="4" y="14" width="16" height="6" rx="1"/></svg></div>
+          <b>سويتشات وموزعات</b><small>Gigabit & POE</small>
+        </div>
+        <div class="cat-card" onclick="selectCategoryFilter('شبكات')">
+          <div class="cat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f6fed" stroke-width="1.8"><path d="M5 13a10 10 0 0 1 14 0"/></svg></div>
+          <b>راوترات ومقويات</b><small>Wi-Fi 6 Enterprise</small>
+        </div>
+        <div class="cat-card" onclick="selectCategoryFilter('مراقبة')">
+          <div class="cat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f6fed" stroke-width="1.8"><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+          <b>كاميرات الذكاء الاصطناعي</b><small>تعرف على الوجوه والمحيط</small>
+        </div>
+        <div class="cat-card" onclick="selectCategoryFilter('إنتركم')">
+          <div class="cat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f6fed" stroke-width="1.8"><rect x="3" y="11" width="18" height="10" rx="2"/></svg></div>
+          <b>أنظمة صوتية ومرئية</b><small>Smart Intercom</small>
+        </div>
+        <div class="cat-card" onclick="selectCategoryFilter('POS')">
+          <div class="cat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f6fed" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/></svg></div>
+          <b>نقاط البيع والحوسبة</b><small>إدارة الكاشير والمخازن</small>
+        </div>
+        <div class="cat-card" onclick="selectCategoryFilter('بصمة')">
+          <div class="cat-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2f6fed" stroke-width="1.8"><path d="M12 2a5 5 0 0 0-5 5v3"/></svg></div>
+          <b>التحكم في الوصول</b><small>بصمة، وجه، كروت ذكية</small>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="page-products" class="page-view">
+  <div class="page-hero">
+    <h1>مركز العتاد العالمي والأنظمة المتكاملة</h1>
+  </div>
+  <section>
+    <div class="wrap">
+      <div class="filter-wrapper" id="filtersContainer">
+        <button class="filter-btn active" onclick="filterByCat('all', this)">كل المعدات والأجهزة</button>
+        <button class="filter-btn" onclick="filterByCat('شبكات', this)">أنظمة الشبكات والسويتشات</button>
+        <button class="filter-btn" onclick="filterByCat('مراقبة', this)">كاميرات المراقبة وأجهزة التسجيل</button>
+        <button class="filter-btn" onclick="filterByCat('بصمة', this)">التحكم في الحضور والانصراف</button>
+        <button class="filter-btn" onclick="filterByCat('إنتركم', this)">أنظمة الإنتركم الذكي</button>
+        <button class="filter-btn" onclick="filterByCat('POS', this)">أنظمة نقاط البيع POS</button>
+      </div>
+
+      <div class="prod-grid" id="prodGrid"></div>
+    </div>
+  </section>
+</div>
+
+<div id="page-about" class="page-view">
+  <div class="page-hero">
+    <h1>هندسة المستقبل والأمان المستدام</h1>
+  </div>
+  <section class="wrap">
+    <div class="info-card">
+      <h2>رؤيتنا العالمية للأنظمة المتكاملة</h2>
+      <p>تأسست <strong>IT SOLUTIONS PRO</strong> لتكون الذراع الفني والهندسي الأقوى للشركات والمؤسسات والمنشآت السكنية. نحن لا نبيع أجهزة مجردة، بل نصمم حلولاً وبنية تحتية متكاملة تعيش لسنوات وتتحمل أعلى مستويات الضغط، مع الالتزام التام بمعايير الأمن السيبراني والأمان الفيزيائي وحماية البيانات الحيوية.</p>
+    </div>
+  </section>
+</div>
+
+<div id="page-contact" class="page-view">
+  <div class="page-hero">
+    <h1>طلب استشارة / جدولة معاينة ميدانية</h1>
+  </div>
+  <section class="wrap">
+    <div class="info-card">
+      <div class="contact-grid">
+        <div>
+          <h3>المكتب المركزي الهندسي</h3>
+          <p>📍 المقر الإقليمي: جمهورية مصر العربية</p>
+          <p>📞 الخط الساخن الفوري: متاح عبر نظام الواتساب الموحد</p>
+          <p>✉️ المراسلات الرسمية: corporate@itsolutions-pro.com</p>
+          <button class="btn btn-primary" onclick="openGeneralWhatsApp()" style="margin-top: 20px;">
+            تحدث مع مهندس الأنظمة مباشرة
+          </button>
+        </div>
+        <div>
+          <h3>تخطيط المنشآت والمقايسات</h3>
+          <div class="form-group">
+            <label>اسم المنشأة / العميل الكريم</label>
+            <input type="text" id="contactName" placeholder="مثال: شركة النور للتطوير">
+          </div>
+          <div class="form-group">
+            <label>طبيعة المشروع والمتطلبات الفنية</label>
+            <textarea id="contactDetails" rows="4" placeholder="يرجى ذكر عدد نقاط الشبكة المطلوبة أو عدد الكاميرات ومساحة الموقع المراد تجهيزه فنيًا..."></textarea>
+          </div>
+          <button class="btn btn-outline" onclick="sendStructuredForm()">إرسال المقايسة المبدئية</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="brands" style="padding:28px 0;">
+  <div class="wrap">
+    <span class="brand-name" style="color:var(--ink-soft);font-family:'Cairo';font-weight:700;">الشركاء والتوكيلات العالمية:</span>
+    <span class="brand-name">TechNet Enterprise</span>
+    <span class="brand-name">ProLink Networks</span>
+    <span class="brand-name">SecureView AI</span>
+    <span class="brand-name">NetCore Labs</span>
+    <span class="brand-name">GuardCam Pro</span>
+  </div>
+</section>
+
+<section>
+  <div class="cta-band">
+    <div>
+      <h3>هل تحتاج مقايسة رسمية لمناقصة أو مشروع ضخم؟</h3>
+      <p>فريقنا الهندسي يمتلك الكفاءة لإعداد الخرائط والرسومات الفنية وتوزيع النقاط في وقت قياسي.</p>
+    </div>
+    <a class="btn btn-primary" onclick="openGeneralWhatsApp()">طلب تسعير مشروعات</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:14px;" onclick="navigateTo('home')">
+          <div class="logo-mark">IT</div>
+          <div class="logo-text"><b style="color:#fff;">IT SOLUTIONS</b></div>
+        </div>
+        <p style="line-height:1.9;font-size:13.5px;">تطوير البنية التحتية، تركيب خوادم، أنظمة المراقبة الذكية، والتحكم الذكي بالدخول وحماية أصول الشركات.</p>
+      </div>
+      <div>
+        <h4>أقسام النظام</h4>
+        <ul>
+          <li><a onclick="navigateTo('about')">من نحن</a></li>
+          <li><a onclick="navigateTo('products')">المعرض والأجهزة</a></li>
+          <li><a onclick="navigateTo('contact')">حجز المعاينات</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>الدعم والحوكمة</h4>
+        <ul>
+          <li><a onclick="navigateTo('contact')">الضمان والسياسات</a></li>
+          <li><a onclick="navigateTo('home')">الأسئلة التقنية</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>النشرة التقنية</h4>
+        <div class="newsletter">
+          <input type="email" placeholder="بريدك الإلكتروني">
+          <button onclick="alert('شكرًا لتسجيلك في النشرة الهندسية المحدثة.')">اشترك</button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar">
+      <span style="font-size:12.5px;">© 2026 IT Solutions Pro. جميع الحقوق والاعتمادات محفوظة.</span>
+      <span style="font-size:12.5px;">بنية برمجية فائقة الاستجابة والسرعة SPA</span>
+    </div>
+  </div>
+</footer>
+
+<a id="waFloat" onclick="openGeneralWhatsApp()"
+   style="position:fixed;bottom:22px;left:22px;z-index:999;width:56px;height:56px;
+   background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;
+   box-shadow:0 10px 26px -8px rgba(37,211,102,.6);transition:transform .2s; cursor: pointer;">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2.1c-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.5-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3C4.2 15 3.8 13.5 3.8 12c0-4.5 3.7-8.2 8.2-8.2s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2z"/></svg>
+</a>
+
+<script>
+const WHATSAPP_NUMBER = '201032641038';
+
+const products = [
+  {id: 1, cat:'شبكات', name:'سويتش شبكة 24 منفذ Gigabit Cisco Managed', price: 2450, old:'2,900', badge:'خصم 15%', badgeType:''},
+  {id: 2, cat:'مراقبة', name:'كاميرا خارجية 4K Smart AI بعدسة ليلية ملونة', price: 1180, old:null, badge:'متوفر', badgeType:'stock'},
+  {id: 3, cat:'شبكات', name:'راوتر واي فاي 6 للأعمال Ubiquiti UniFi Long-Range', price: 3650, old:null, badge:'جديد', badgeType:''},
+  {id: 4, cat:'بصمة', name:'جهاز بصمة ووجه حضور وانصراف ZKTeco Pro', price: 2050, old:'2,300', badge:'خصم', badgeType:''},
+  {id: 5, cat:'إنتركم', name:'إنتركم فيديو IP ذكي متصل بالموبايل 4 شقق', price: 3900, old:null, badge:'متوفر', badgeType:'stock'},
+  {id: 6, cat:'POS', name:'طرفية كاشير مع شاشة عميل مدمجة وطابعة فواتير', price: 6750, old:null, badge:'الأكثر مبيعاً', badgeType:''},
+  {id: 7, cat:'شبكات', name:'كابل شبكة Cat6 لفة 305 متر النحاس النقي 100%', price: 980, old:null, badge:'متوفر', badgeType:'stock'},
+  {id: 8, cat:'مراقبة', name:'جهاز تسجيل NVR 16 قناة بدقة 8MP 4K H.265+', price: 4200, old:'4,850', badge:'خصم', badgeType:''},
+];
+
+// Persistent Cart initialization from Local Storage
+let cart = JSON.parse(localStorage.getItem('it_pro_cart')) || {};
+let currentCategoryFilter = 'all';
+
+function navigateTo(pageId) {
+  document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active-page'));
+  const targetPage = document.getElementById('page-' + pageId);
+  if(targetPage) targetPage.classList.add('active-page');
+  
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+    if(link.getAttribute('data-page') === pageId) link.classList.add('active');
+  });
+  
+  document.getElementById('catNavMenu').classList.remove('mobile-open');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openGeneralWhatsApp() {
+  const welcomeText = "مرحبًا IT Solutions Pro، أود الاستفسار عن الأنظمة المتكاملة المتاحة وحجز موعد معاينة.";
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(welcomeText)}`, '_blank');
+}
+
+// Global Live Rendering Engine with support for Category Filter and Search Query
+function renderProducts(filterCat = 'all', searchQuery = '') {
+  const grid = document.getElementById('prodGrid');
+  if(!grid) return;
+  
+  let filtered = products;
+  
+  if (filterCat !== 'all') {
+    filtered = filtered.filter(p => p.cat === filterCat);
+  }
+  
+  if (searchQuery.trim() !== '') {
+    filtered = filtered.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.cat.toLowerCase().includes(searchQuery.toLowerCase()));
+  }
+
+  if(filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results">لم نجد نتائج تطابق بحثك أو تصنيفك الحالي، جرب كلمات أخرى أو تصفح كل الأجهزة.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((p) => `
+    <div class="prod-card">
+      <div class="prod-img">
+        <span class="prod-badge ${p.badgeType}">${p.badge}</span>
+        <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+          <rect x="3" y="7" width="18" height="11" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+        </svg>
+      </div>
+      <div class="prod-body">
+        <div class="prod-cat">${p.cat}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-price-row">
+          <div class="prod-price">${p.price.toLocaleString('ar-EG')} ج.م ${p.old ? `<small>${p.old}</small>` : ''}</div>
+          <button class="add-btn" aria-label="إضافة إلى السلة" onclick="addToCart(${p.id}, this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Live filter trigger from the filter buttons bar
+function filterByCat(cat, btnElement) {
+  currentCategoryFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  if(btnElement) btnElement.classList.add('active');
+  renderProducts(currentCategoryFilter, document.getElementById('mainSearchInput').value);
+}
+
+// Quick filter trigger from homepage cards
+function selectCategoryFilter(cat) {
+  navigateTo('products');
+  const targetBtn = Array.from(document.querySelectorAll('.filter-btn')).find(btn => btn.textContent.includes(cat));
+  filterByCat(cat, targetBtn);
+}
+
+// Real-time Search Engine Execution
+function executeSearch() {
+  const query = document.getElementById('mainSearchInput').value;
+  navigateTo('products');
+  renderProducts(currentCategoryFilter, query);
+}
+
+// Cart State Management with LocalStorage Sync
+function addToCart(id, btn) {
+  cart[id] = (cart[id] || 0) + 1;
+  saveCartAndRefresh();
+  
+  const originalHTML = btn.innerHTML;
+  btn.style.background = '#1fae6b';
+  btn.innerHTML = '✓';
+  setTimeout(() => { btn.style.background = ''; btn.innerHTML = originalHTML; }, 800);
+}
+
+function changeQty(id, delta) {
+  if(cart[id]) {
+    cart[id] += delta;
+    if(cart[id] <= 0) delete cart[id];
+    saveCartAndRefresh();
+  }
+}
+
+function removeFromCart(id) {
+  delete cart[id];
+  saveCartAndRefresh();
+}
+
+function saveCartAndRefresh() {
+  localStorage.setItem('it_pro_cart', JSON.stringify(cart));
+  updateCartUI();
+}
+
+function updateCartUI() {
+  let totalCount = 0, totalPrice = 0;
+  const container = document.getElementById('cartItemsContainer');
+  
+  Object.keys(cart).forEach(id => {
+    const product = products.find(p => p.id == id);
+    if(product) {
+      totalCount += cart[id];
+      totalPrice += (product.price * cart[id]);
+    }
+  });
+  
+  document.getElementById('cartCountBadge').innerText = totalCount;
+  document.getElementById('cartTotalHeader').innerText = totalPrice.toLocaleString('ar-EG') + ' ج.م';
+  document.getElementById('cartDrawerTotal').innerText = totalPrice.toLocaleString('ar-EG') + ' ج.م';
+  
+  if(totalCount === 0) {
+    container.innerHTML = '<div class="cart-empty-msg">سلة المشتريات فارغة حالياً. أضف بعض المعدات التقنية لبدء مشروعك.</div>';
+  } else {
+    container.innerHTML = Object.keys(cart).map(id => {
+      const p = products.find(prod => prod.id == id);
+      return `
+        <div class="cart-item">
+          <div class="cart-item-details">
+            <div class="cart-item-title">${p.name}</div>
+            <div class="cart-item-price">${(p.price * cart[id]).toLocaleString('ar-EG')} ج.م</div>
+            <div class="cart-item-qty">
+              <button class="qty-btn" onclick="changeQty(${p.id}, -1)">-</button>
+              <span>${cart[id]}</span>
+              <button class="qty-btn" onclick="changeQty(${p.id}, 1)">+</button>
+            </div>
+          </div>
+          <button class="remove-item" onclick="removeFromCart(${p.id})">حذف</button>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+function checkoutViaWhatsApp() {
+  let keys = Object.keys(cart);
+  if(keys.length === 0) { return alert("برجاء إضافة أنظمة للمحفظة أولاً!"); }
+  
+  let msg = "🛒 *طلب بنية تحتية ومعدات أمنية - IT Solutions Pro*\n";
+  msg += "---------------------------------------\n\n";
+  let total = 0;
+  
+  keys.forEach(id => {
+    const p = products.find(prod => prod.id == id);
+    if(p) {
+      const qty = cart[id];
+      total += p.price * qty;
+      msg += `▪️ *${p.name}*\n   العدد: ${qty} | إجمالي: ${(p.price * qty).toLocaleString('ar-EG')} ج.م\n\n`;
+    }
+  });
+  
+  msg += "---------------------------------------\n";
+  msg += `💰 *الإجمالي النهائي للمقايسة المبدئية:* ${total.toLocaleString('ar-EG')} ج.م\n\n`;
+  msg += "يرجى مراجعة الطلب وتحديد أقرب موعد للمعاينة الهندسية.";
+  
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function sendStructuredForm() {
+  const name = document.getElementById('contactName').value;
+  const details = document.getElementById('contactDetails').value;
+  if(!name || !details) return alert("برجاء ملء البيانات لتجهيز المقايسة.");
+  
+  let msg = `🏛️ *طلب دراسة مقايسة لموقع جديد*\n\n*الجهة طالبة الفحص:* ${name}\n*تفاصيل ومساحة الموقع:* ${details}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// Global Dark/Light Theme Handler
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+themeToggleBtn.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('it_theme', newTheme);
+});
+
+// Load preferred theme
+const savedTheme = localStorage.getItem('it_theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+// Core Listeners
+document.addEventListener('DOMContentLoaded', () => {
+  renderProducts();
+  updateCartUI();
+  
+  // Real-time search trigger on pressing Enter or Typing
+  document.getElementById('mainSearchInput').addEventListener('keyup', (e) => {
+    executeSearch();
+  });
+
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('cartOverlay');
+  
+  document.getElementById('cartTriggerBtn').addEventListener('click', () => {
+    drawer.classList.add('open'); overlay.classList.add('open');
+  });
+  
+  document.getElementById('closeCartBtn').addEventListener('click', () => {
+    drawer.classList.remove('open'); overlay.classList.remove('open');
+  });
+  
+  overlay.addEventListener('click', () => {
+    drawer.classList.remove('open'); overlay.classList.remove('open');
+  });
+  
+  document.getElementById('checkoutWhatsappBtn').addEventListener('click', checkoutViaWhatsApp);
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('catNavMenu').classList.toggle('mobile-open');
+  });
+});
+
+// Interactive Hero SVG Network Animation
+(function(){
+  const svg = document.getElementById('netsvg');
+  if(!svg) return;
+  const linksG = svg.querySelector('.links');
+  const nodesG = svg.querySelector('.nodes');
+  const pts = [[60,80],[210,40],[350,90],[110,190],[260,170],[380,230],[70,300],[210,340],[330,330],[150,250]];
+  const edges = [[0,1],[1,2],[0,3],[1,4],[2,5],[3,4],[4,5],[3,6],[4,7],[5,8],[6,7],[7,8],[3,9],[7,9]];
+
+  edges.forEach(([a,b])=>{
+    const [x1,y1]=pts[a], [x2,y2]=pts[b];
+    const l = document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',x1); l.setAttribute('y1',y1); l.setAttribute('x2',x2); l.setAttribute('y2',y2);
+    l.setAttribute('class','link');
+    linksG.appendChild(l);
+  });
+
+  pts.forEach((p,i)=>{
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',p[0]); c.setAttribute('cy',p[1]);
+    c.setAttribute('r', i%3===0 ? 7 : 5);
+    c.setAttribute('class','node' + (i%4===0 ? ' node-orange' : ''));
+    nodesG.appendChild(c);
+  });
+
+  function spawnPulse(){
+    if(document.hidden) return;
+    const [a,b] = edges[Math.floor(Math.random()*edges.length)];
+    const [x1,y1]=pts[a], [x2,y2]=pts[b];
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('r',3.5); dot.setAttribute('class','pulse');
+    svg.appendChild(dot);
+    let t=0; const dur = 1400 + Math.random()*800; const start = performance.now();
+    function step(now){
+      t = Math.min(1,(now-start)/dur);
+      dot.setAttribute('cx', x1 + (x2-x1)*t); dot.setAttribute('cy', y1 + (y2-y1)*t);
+      dot.setAttribute('opacity', t<0.1 ? t*10 : (t>0.85 ? (1-t)/0.15 : 1));
+      if(t<1) requestAnimationFrame(step); else dot.remove();
+    }
+    requestAnimationFrame(step);
+  }
+  setInterval(spawnPulse, 600);
+})();
+</script>
+</body>
+</html>
